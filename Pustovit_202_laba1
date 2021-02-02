@@ -1,0 +1,117 @@
+package LABA_1_OOP;
+
+import java.util.ArrayList;
+
+public class Main {
+    char[] all_letters = {'а','б','в','г','д','е','є','ж','з','и','і','ї','й','к','л','м','н','о','п','р','с','т','у',
+            'ф','х','ц','ч','ш','щ','ь','ю','я','А','Б','В','Г','Д','Е','Є','Ж','З','И','І','Ї','Й','К','Л','М','Н',
+            'О','П','Р','С','Т','У','Ф','Х','Ц','Ч','Ш','Щ','Ь','Ю','Я',' '};
+
+    char[] letters_skip = {'б','г','е','ж','и','ї','к','м','о','р','т','ф','ц','ш','ь','я','а','в','д','є','з','і',
+            'й','л','н','п','с','у','х','ч','щ','ю', 'Б','Г','Е','Ж','И','Ї','К','М','О','Р','Т','Ф','Ц','Ш','Ь','Я',
+            'А','В','Д','Є','З','І','Й','Л','Н','П','С','У','Х','Ч','Щ','Ю',' '};
+
+
+    public Integer[] generalElements(int[][] arr1, int[][] arr2) {
+        ArrayList<Integer> onelineArr1 = new ArrayList<>(), onelineArr2 = new ArrayList<>(),
+                arrRes = new ArrayList<>();
+        Integer[] result;
+
+        for(int i = 0; i < arr1.length; ++i) {
+            for(int j = 0; j < arr1[i].length; ++j) {
+                onelineArr1.add(arr1[i][j]);
+            }
+        }
+        for(int i = 0; i < arr2.length; ++i) {
+            for(int j = 0; j < arr2[i].length; ++j) {
+                onelineArr2.add(arr2[i][j]);
+            }
+        }
+        for(int item1 : onelineArr1) {
+            for(int item2 : onelineArr2) {
+                if(item1 == item2) {
+                    arrRes.add(item2);
+                }
+            }
+        }
+        result = new Integer[arrRes.size()];
+        result = arrRes.toArray(result);
+        return result;
+    }
+
+
+    public String codingString(String str) {
+        int[] indexes = new int[str.length()];
+        StringBuilder newStr = new StringBuilder();
+        for(int i = 0; i < str.length(); ++i) {
+            for (int j = 0; j < all_letters.length; ++j) {
+                if (str.charAt(i) == all_letters[j]) {
+                    indexes[i] = j;
+                    break;
+                }
+            }
+            newStr.append(letters_skip[indexes[i]]);
+        }
+        str = newStr.toString();
+        return str;
+    }
+    public String decodingString(String str) {
+        int[] indexes = new int[str.length()];
+        StringBuilder newStr = new StringBuilder();
+        for(int i = 0; i < str.length(); ++i) {
+            for (int j = 0; j < all_letters.length; ++j) {
+                if (str.charAt(i) == all_letters[j]) {
+                    indexes[i] = j;
+                    break;
+                }
+            }
+            newStr.append(all_letters[indexes[i]]);
+        }
+        str = newStr.toString();
+        return str;
+    }
+
+
+    static class RecursiveFactorial {
+    int fact(int n) {
+        int resultfact1;
+
+        if(n == 1) return 1;
+        resultfact1 = fact(n - 1) * n;
+
+        return resultfact1;
+
+    }
+}
+
+    static class IterationFactorial{
+    int calculatefactorial(int n){
+        int resultfact2 = 1;
+        for (int i = 1; i <=n; i ++){
+        resultfact2 = resultfact2*i;
+        }
+        return resultfact2;
+        }
+
+
+        public static void main(String[] args) {
+        Main main = new Main();
+
+        String demostring1 = "лАОВшпшплрлдвпошвапшваоЛ", demostring2 = "плдаошів шашщівшщ пшпоаолвп";
+        System.out.println("Coded first string : " + main.codingString(demostring1));
+        System.out.println("Decoded first string: " + main.decodingString(demostring1));
+        System.out.println("Coded second string : " + main.codingString(demostring2));
+        System.out.println("Decoded second string : " + main.decodingString(demostring2));
+
+        int[][] arr1 = {{4, 6, 28, 93, 5, 23, 65, 24, 75, 21, 92}, {5, 3, 92, 23, 64, 66, 99, 14}};
+        int[][] arr2 = {{5, 12, 65, 23, 75, 26, 42, 76, 32, 56, 64}, {63, 265, 33, 22, 15, 64}};
+        Integer[] arr3 = main.generalElements(arr1, arr2);
+        for(int item : arr3) {
+            System.out.println(item);
+        }
+        RecursiveFactorial fact = new RecursiveFactorial();
+        System.out.println("Recursive factorial of 5 is: " + fact.fact(5));
+        IterationFactorial calculatefactorial = new IterationFactorial();
+        System.out.println("Calculated factorial of 4 is: " + calculatefactorial.calculatefactorial(4));
+    }
+}}
