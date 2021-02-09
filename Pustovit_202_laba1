@@ -39,6 +39,85 @@ public class Main {
         return result;
     }
 
+    static class Task4 {
+        public String countWords(String arg1, String arg2) {
+            char[] compared = arg2.toCharArray();
+            char[] unique = new char[compared.length];
+            int k = 0;
+            for (int i = 0; i < compared.length; i++) {
+                boolean founded = false;
+                for (int j = 0; j < unique.length; j++) {
+                    if (compared[i] == unique[j]) {
+                        founded = true;
+                    }
+                }
+                if (!founded) {
+                    unique[k] = compared[i];
+                    k++;
+                }
+            }
+            char[] finalUnique = new char[k];
+            int[] finalNumbers = new int[k];
+            for (int i : finalNumbers) i = 1;
+            for (int i = 0; i < finalUnique.length; i++) {
+                finalUnique[i] = unique[i];
+            }
+            for (int i = 0; i < compared.length; i++) {
+                for (int j = 0; j < finalUnique.length; j++) {
+                    if (compared[i] == finalUnique[j]) {
+                        finalNumbers[j]++;
+                    }
+                }
+            }
+            char[] goal = arg1.toCharArray();
+            char[] unique2 = new char[compared.length];
+            int r = 0;
+            for (int i = 0; i < goal.length; i++) {
+                boolean founded = false;
+                for (int j = 0; j < unique2.length; j++) {
+                    if (goal[i] == unique2[j]) {
+                        founded = true;
+                    }
+                }
+                if (!founded) {
+                    unique2[r] = goal[i];
+                    r++;
+                }
+            }
+            char[] finalUnique2 = new char[r];
+            int[] finalNumbers2 = new int[r];
+            for (int i : finalNumbers2) i = 1;
+            for (int i = 0; i < finalUnique2.length; i++) {
+                finalUnique2[i] = unique2[i];
+            }
+            for (int i = 0; i < goal.length; i++) {
+                for (int j = 0; j < finalUnique2.length; j++) {
+                    if (goal[i] == finalUnique2[j]) {
+                        finalNumbers2[j]++;
+                    }
+                }
+            }
+            char[] finalUnique3 = finalUnique2.clone();
+            int[] finalNumbers3 = new int[finalNumbers2.length];
+            for (int c : finalNumbers3) c = 0;
+            for (int i = 0; i < finalUnique3.length; i++) {
+                for (int j = 0; j < finalUnique.length; j++) {
+                    if (finalUnique3[i] == finalUnique[j]) {
+                        finalNumbers3[i] = finalNumbers[j];
+                    }
+                }
+            }
+            int[] number = new int[finalNumbers2.length];
+            for (int i = 0; i < finalUnique2.length; i++) {
+                number[i] = (finalNumbers3[i] / finalNumbers2[i]);
+            }
+            int finalResult = number[0];
+            for (int i : number) {
+                if (i < finalResult) finalResult = i;
+            }
+            return String.valueOf(finalResult);
+        }
+    }
 
     public String codingString(String str) {
         int[] indexes = new int[str.length()];
@@ -95,6 +174,7 @@ public class Main {
 
 
         public static void main(String[] args) {
+
         Main main = new Main();
 
         String demostring1 = "лАОВшпшплрлдвпошвапшваоЛ", demostring2 = "плдаошів шашщівшщ пшпоаолвп";
@@ -113,5 +193,8 @@ public class Main {
         System.out.println("Recursive factorial of 5 is: " + fact.fact(5));
         IterationFactorial calculatefactorial = new IterationFactorial();
         System.out.println("Calculated factorial of 4 is: " + calculatefactorial.calculatefactorial(4));
+
+        Task4 string_one = new Task4();
+        System.out.println("just writing useless text" + string_one.countWords(5));
     }
 }}
