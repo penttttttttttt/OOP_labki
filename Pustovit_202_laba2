@@ -1,1 +1,256 @@
+public class ClientTask46 {
+	    int cheque;
+	    String address_delivery;
+	    
+	    ClientTask46(ClientTask46 obj) {
+	        cheque = obj.cheque;
+	        address_delivery = obj.address_delivery;
+	    }
+	    ClientTask46(int cheque, String address_delivery){
+        this.cheque = cheque;
+        this.address_delivery = address_delivery;
+	    }
+	    ClientTask46(){
+	    	cheque = 0;
+	    	address_delivery = "kosmonavtov street, 56, Mykolaiv";
+	    }
+	    public void Show() {
+	    	System.out.println(cheque);
+	    	System.out.println(address_delivery);
+	    }
+	}
+  
+  
+  
+  
+  
+class SellerTask46 extends UserTask46{
+	    
+		SellerTask46(String login, String passwd, String email, int num) {
+		super(login, passwd, email, num);
+	}
+
+		int subdivision = 54;
+	    String applydate = "27.09.383838";
+	    int bonussum = 35;
+	    int phone;
+	    
+void SellerTask46(SellerTask46 sl){
+	    subdivision = sl.subdivision;
+	    applydate = sl.applydate;
+	    bonussum = sl.bonussum;
+	    phone = sl.phone;
+	}
+
+void Out() {
+	System.out.println(super.phone);
+	System.out.println(subdivision);
+	System.out.println(bonussum);
+	System.out.println(applydate);
+}
+}
+
+
+
+
+public class UserTask46 {
+    String login;
+    String passwd;
+    String email;
+    int phone;
+    
+    UserTask46 (String login, String passwd, String email, int num){
+    this.login = login;
+    this.passwd = passwd;
+    this.email = email;
+    this.phone = num;
+}
+    void Demonstration() {
+    	System.out.println(login);
+    	System.out.println(passwd);
+    	System.out.println(email);
+    	System.out.println(phone);
+    }
+}
+
+
+
+
+
+
+
+
+public class ClientGenderTask46 extends ClientTask46{
+    String gender1;
+    String gender2;
+    
+    ClientGenderTask46(String gender1, String gender2){
+        this.gender1 = gender1;
+        this.gender2 = gender2;
+	    }
+    ClientGenderTask46(){
+    	gender1 = "male";
+    	gender2 = "female";
+    }
+    void Printing(){
+    	System.out.println(gender1);
+    	System.out.println(gender2);
+    }
+}
+
+
+
+
+
+
+
+
+class ArithmeticEx {
+  public static void main(String[] args) {
+    try {
+      int example = 500/0;
+       System.out.println("dividing by 0");
+    } catch (ArithmeticException e) {
+      System.out.println("arithmetic exception - u can't divide by 0");
+    }
+  }
+}
+
+
+
+
+
+
+
+
+public class PlantTask47 {
+	    String title;
+	    String area;
+	    int age;
+	    double width = 1.5;
+	    
+	    PlantTask47(PlantTask47 obj) {
+	    title = obj.title;
+	    area = obj.area;
+	    age = obj.age;
+	    width = obj.width;
+	}
+	    PlantTask47 (String title, String area, int age, double width){
+	    this.title = title;
+	    this.area = area;
+	    this.age = age;
+	    this.width = width;
+	}
+	    PlantTask47(){
+	    title = "";
+	    area = "";
+	    age = 0;
+	}
+		public void Demo() {
+		System.out.println(width);
+		System.out.println(age);
+		}
+}
+
+
+
+
+
+
+
+
+public class FlowersTask47 extends PlantTask47 {
+    String type;
+    String title;
+    int length;
+    
+public FlowersTask47(String tp, String ttl, int len){
+        type = tp;
+        title = ttl;
+    	length = len;
+    }
+}
+
+
+
+
+
+
+
+
+
+public class TreesTask47 extends PlantTask47 {
+    String title = "Acacia tree";
+    double width = 2.5;
+    public void Demo()
+    {
+    	super.Demo();
+    	System.out.println(width);
+    }
+}
+
+
+
+
+
+
+
+
+interface Driving {
+    double speed = 54.4;
+    int kilometers = 100;
+    void drive();
+}
+
+abstract class Car {
+    public String model;
+    public abstract void stop();
+}
+class Process extends Car implements Driving{
+
+    @Override
+    public void drive() {
+        System.out.println("Car goes on");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Car stopped");
+    }
+}
+abstract class Human {
+    abstract void doSomething();
+}
+
+
+
+
+
+
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		new TreesTask47().Demo();
+		new ClientTask46().Show();
+		new ClientGenderTask46().Printing();
+		new UserTask46("admin", "ajajaj", "ded@dead.com", 37773).Demonstration();
+		new SellerTask46("ahahahah", "helloworld", "hi@goodbye.ua", 8883838).Out();
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
