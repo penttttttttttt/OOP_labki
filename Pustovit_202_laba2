@@ -1,20 +1,27 @@
-public class ClientTask46 {
+//створити ієрархію спадкування із сутностей Користувач , Покупець та Продавець.
+//Продемонструвати особливості конструкторів при спадкуванні, перевизначення методів, перевантаження конструкторів та методів
+class ClientTask46 extends UserTask46 {
 	    int cheque;
 	    String address_delivery;
+	     
+	    ClientTask46(ClientTask46 usr) {
+	    	super(usr);
+	        cheque = usr.cheque;
+	        address_delivery = usr.address_delivery;
+	    }
 	    
-	    ClientTask46(ClientTask46 obj) {
-	        cheque = obj.cheque;
-	        address_delivery = obj.address_delivery;
+	    ClientTask46(String log, String pswrd, String mail, int num, int cheq, String addr){
+	    super(log, pswrd, mail, num);
+        cheque = cheq;
+        address_delivery = addr;
 	    }
-	    ClientTask46(int cheque, String address_delivery){
-        this.cheque = cheque;
-        this.address_delivery = address_delivery;
-	    }
+	    
 	    ClientTask46(){
-	    	cheque = 0;
-	    	address_delivery = "kosmonavtov street, 56, Mykolaiv";
+	    	cheque = 1337;
+	    	address_delivery = "Kosmonavtiv street, 56, Mykolaiv";
 	    }
-	    public void Show() {
+
+	    void show() {
 	    	System.out.println(cheque);
 	    	System.out.println(address_delivery);
 	    }
@@ -23,49 +30,85 @@ public class ClientTask46 {
   
   
   
-  
+//створити ієрархію спадкування із сутностей Користувач , Покупець та Продавець.
+//Продемонструвати особливості конструкторів при спадкуванні, перевизначення методів, перевантаження конструкторів та методів
 class SellerTask46 extends UserTask46{
 	    
-		SellerTask46(String login, String passwd, String email, int num) {
-		super(login, passwd, email, num);
-	}
-
-		int subdivision = 54;
-	    String applydate = "27.09.383838";
-	    int bonussum = 35;
-	    int phone;
+	    int subdivision;
+	    String applydate;
+	    int bonussum;
 	    
-void SellerTask46(SellerTask46 sl){
-	    subdivision = sl.subdivision;
-	    applydate = sl.applydate;
-	    bonussum = sl.bonussum;
-	    phone = sl.phone;
-	}
+SellerTask46(SellerTask46 usr){
+	super(usr);
+	subdivision = usr.subdivision;
+	applydate = usr.applydate;
+	bonussum = usr.bonussum;
+}
 
-void Out() {
-	System.out.println(super.phone);
+SellerTask46(String log, String pswrd, String mail, int num, int sub, String date, int bonuses){
+	super(log, pswrd, mail, num);
+	subdivision = sub;
+	applydate = date;
+	bonussum = bonuses;
+}
+
+//переопределение метода task46
+@Override
+void task46() {
+super.task46();
+	System.out.println(subdivision + bonussum);
+}
+
+SellerTask46(){
+	
+	subdivision = 25;
+	applydate = "26.04.1986";
+	bonussum = 10;
+}
+
+void out() {
+	System.out.println(phone);
 	System.out.println(subdivision);
 	System.out.println(bonussum);
 	System.out.println(applydate);
-}
-}
+}}
 
 
 
 
-public class UserTask46 {
+//створити ієрархію спадкування із сутностей Користувач , Покупець та Продавець.
+//Продемонструвати особливості конструкторів при спадкуванні, перевизначення методів, перевантаження конструкторів та методів
+class UserTask46 {
     String login;
     String passwd;
     String email;
     int phone;
     
-    UserTask46 (String login, String passwd, String email, int num){
-    this.login = login;
-    this.passwd = passwd;
-    this.email = email;
-    this.phone = num;
-}
-    void Demonstration() {
+    UserTask46(UserTask46 usr){
+    	login = usr.login;
+    	passwd = usr.passwd;
+    	email = usr.email;
+    	phone = usr.phone;
+    }
+    
+    UserTask46(String log, String pswrd, String mail, int num){
+    	login = log;
+    	passwd = pswrd;
+    	email = mail;
+    	phone = num;
+    }
+    
+    void task46() {
+    	System.out.println(login + passwd);
+    }   
+    
+    UserTask46(){
+    	login = "1234";
+    	passwd = "4321qwerty";
+    	email = "pustovit@gmail.com";
+    	phone = 666666;
+    }
+    void text() {
     	System.out.println(login);
     	System.out.println(passwd);
     	System.out.println(email);
@@ -76,23 +119,30 @@ public class UserTask46 {
 
 
 
-
-
-
-
+//створити ієрархію спадкування із сутностей Користувач , Покупець та Продавець.
+//Продемонструвати особливості конструкторів при спадкуванні, перевизначення методів, перевантаження конструкторів та методів
 public class ClientGenderTask46 extends ClientTask46{
     String gender1;
     String gender2;
     
-    ClientGenderTask46(String gender1, String gender2){
-        this.gender1 = gender1;
-        this.gender2 = gender2;
+ClientGenderTask46(ClientGenderTask46 usr){
+    	super(usr);
+        gender1 = usr.gender1;
+        gender2 = usr.gender2;
 	    }
-    ClientGenderTask46(){
-    	gender1 = "male";
-    	gender2 = "female";
+    
+ClientGenderTask46(String log, String pswrd, String mail, int num, String male, String female){
+	    super();
+    	gender1 = male;
+    	gender2 = female;
     }
-    void Printing(){
+ClientGenderTask46(){
+	super();
+	gender1 = "male";
+	gender2 = "female";
+}
+
+void printing(){
     	System.out.println(gender1);
     	System.out.println(gender2);
     }
@@ -101,52 +151,58 @@ public class ClientGenderTask46 extends ClientTask46{
 
 
 
-
-
-
-
+//продемонструйте при перехопленні виключення ArithmeticException можливості усунути помилку у даних та виконати завдання у повному обсязі.
 class ArithmeticEx {
-  public static void main(String[] args) {
+  public static void main(String[] args) {}
+	  void show() {
     try {
       int example = 500/0;
        System.out.println("dividing by 0");
-    } catch (ArithmeticException e) {
+       throw new ArithmeticException("arithmetic");
+       
+    } 
+    catch (ArithmeticException e) {
       System.out.println("arithmetic exception - u can't divide by 0");
+      throw e;
     }
-  }
-}
+    finally {
+ 	   System.out.println("Finally block!");
+    }
+}}
 
 
 
 
-
-
-
-
-public class PlantTask47 {
-	    String title;
+//створити ієрархію спадкування із сутностей Рослина, Дерева та Квіти.                   
+//Продемонструвати особливості конструкторів при спадкуванні, перевизначення методів, перевантаження конструкторів та методів
+class PlantTask47 {
+	    String name;
 	    String area;
 	    int age;
-	    double width = 1.5;
+	    double width;
 	    
-	    PlantTask47(PlantTask47 obj) {
-	    title = obj.title;
-	    area = obj.area;
-	    age = obj.age;
-	    width = obj.width;
-	}
-	    PlantTask47 (String title, String area, int age, double width){
-	    this.title = title;
-	    this.area = area;
-	    this.age = age;
-	    this.width = width;
-	}
+	    PlantTask47(PlantTask47 plant) {
+	    name = plant.name;
+	    area = plant.area;
+	    age = plant.age;
+	    width = plant.width;
+	} 
+	    PlantTask47 (String nm, String ar, int years, double wd){
+	    name = nm;
+	    area = ar;
+	    age = years;
+	    width = wd;
+	}  
+	    void task47(){
+	    	System.out.println(name + area);
+	    }
 	    PlantTask47(){
-	    title = "";
-	    area = "";
-	    age = 0;
+	    name = "Something alive";
+	    area = "Whole planet";
+	    age = 18;
+	    width = 1.5; 
 	}
-		public void Demo() {
+		void plants() {
 		System.out.println(width);
 		System.out.println(age);
 		}
@@ -155,47 +211,91 @@ public class PlantTask47 {
 
 
 
-
-
-
-
-public class FlowersTask47 extends PlantTask47 {
+//створити ієрархію спадкування із сутностей Рослина, Дерева та Квіти.                   
+//Продемонструвати особливості конструкторів при спадкуванні, перевизначення методів, перевантаження конструкторів та методів
+class FlowersTask47 extends PlantTask47 {
     String type;
     String title;
     int length;
+    int test;
     
-public FlowersTask47(String tp, String ttl, int len){
-        type = tp;
-        title = ttl;
-    	length = len;
+    FlowersTask47(FlowersTask47 plant){
+    	  super(plant);
+    	  type = plant.type;
+    	  title = plant.title;
+    	  length = plant.length;
+      }
+    
+    FlowersTask47(String nm, String ar, int years, double wd, String tp, String ttl, int len, int tt){
+          super(nm, ar , years, wd);
+          type = tp;
+          title = ttl;
+          length = len;
+          test = tt;
+    }
+    
+    @Override
+    void task47(){
+    	super.task47();
+    	System.out.println(type + title);
+    }
+
+    FlowersTask47(){
+    	type = "Flower";
+    	title = "Rose";
+    	length = 54;
+    }
+    void flowers() {
+		System.out.println(type);
+		System.out.println(title);
+		System.out.println(length);
     }
 }
 
 
 
 
-
-
-
-
-
-public class TreesTask47 extends PlantTask47 {
-    String title = "Acacia tree";
-    double width = 2.5;
-    public void Demo()
+//створити ієрархію спадкування із сутностей Рослина, Дерева та Квіти.                   
+//Продемонструвати особливості конструкторів при спадкуванні, перевизначення методів, перевантаження конструкторів та методів
+class TreesTask47 extends PlantTask47 {
+    String title;
+    double wide;
+    
+    TreesTask47(TreesTask47 plant){
+    	super(plant);
+    	title = plant.title;
+    	wide = plant.wide;
+    }
+    
+    TreesTask47(String nm, String ar, int years, double wd, String ttl, double we){
+    	super(nm, ar, years, wd);
+    	title = ttl;
+    	wide = we;
+    }
+    
+    @Override
+    void task47(){
+    	super.task47();
+    	System.out.println(wide + title);
+    }
+    
+    TreesTask47(){
+    	super();
+    	title = "Acacia";
+    	wide = 3.5;
+    }
+  
+    void demo()
     {
-    	super.Demo();
-    	System.out.println(width);
+    	System.out.println(title);
+    	System.out.println(wide);
     }
 }
 
 
 
 
-
-
-
-
+//Створіть тестовий приклад, який демонструє відмінність між інтерфейсами та абстактними класами по своїм можливостям.
 interface Driving {
     double speed = 54.4;
     int kilometers = 100;
@@ -225,32 +325,39 @@ abstract class Human {
 
 
 
-
-
-
-
+//точка входу програми
 public class Main {
 
 	public static void main(String[] args) {
-		new TreesTask47().Demo();
-		new ClientTask46().Show();
-		new ClientGenderTask46().Printing();
-		new UserTask46("admin", "ajajaj", "ded@dead.com", 37773).Demonstration();
-		new SellerTask46("ahahahah", "helloworld", "hi@goodbye.ua", 8883838).Out();
-	}
+        
+		SellerTask46 over = new SellerTask46("5", "6", "7", 8, 9, "10", 7);
+        over.task46(); 
+		new TreesTask47().demo();
+		new ClientTask46().show();
+		new ClientGenderTask46().printing();
+		new UserTask46().text();
+		new PlantTask47().plants();
+		new SellerTask46().out();
+		new FlowersTask47().flowers();
 }
 
+int summa(int subdivision, int bonussum) {
+	return subdivision + bonussum;
+}
+double summa (double subdivision, double bonussum) {
+	return subdivision + bonussum;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+int multi(int length, int test) {
+	return length + test;
+}
+double multi (double length, double test) {
+	return length + test;
+}
+{
+    System.out.println(summa(2, 3));
+    System.out.println(summa(4.5, 5.4));
+    System.out.println(multi(5, 12));
+    System.out.println(multi(7.7, 6.6));
+    }
+}
