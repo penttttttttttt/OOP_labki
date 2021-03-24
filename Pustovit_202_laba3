@@ -1,0 +1,93 @@
+PiligrimStation.java
+
+
+
+package LABA_3_OOP;
+import java.util.ArrayList;
+
+	class PiligrimStation {
+	    String ship_name;
+	    String race;
+	    int weight;
+
+	    PiligrimStation(String ship_name, String race, int weight) {
+	        this.ship_name = ship_name;
+	        this.race = race;
+	        this.weight = weight;
+	    }
+
+	    PiligrimStation() {
+	        this.ship_name = "";
+	        this.race = "";
+	        this.weight = 0;
+	    }
+
+	    static boolean isShipsMoreThan10(ArrayList<PiligrimStation> station) {
+	        boolean flag = false;
+	        if (station.size() < 10) {
+	            flag = true;
+	        }
+	        return flag;
+	    }
+
+	    static void addShipToStation(ArrayList<PiligrimStation> station, PiligrimStation ship) {
+	        if (isShipsMoreThan10(station) && checkWeight(station, ship, 100) && checkRace(station, ship)) {
+	        	station.add(ship);
+	        } else System.out.println("Error. There are more than 10 ships already.");
+	    }
+
+	    static boolean checkRace(ArrayList<PiligrimStation> station, PiligrimStation ship) {
+	    	boolean flag = true;
+	    	for(PiligrimStation st : station) {
+	    		if((st.race == "Turyantsi" && ship.race == "Hodakeytsi")|| (st.race == "Zemlyany" && ship.race == "Turyantsi")) {
+	    			flag = false;
+	    	    } else flag = true;
+	    	}
+			return flag;
+	    }
+	     
+	    static boolean checkWeight(ArrayList<PiligrimStation> station, PiligrimStation ship, int limitWeight) {
+	    	int sumWeight = 0;
+	    	for(PiligrimStation st : station) {
+	    		sumWeight += st.weight;   
+	    	}
+	    	sumWeight += ship.weight;
+	    	if(sumWeight > limitWeight)
+	    		return false;
+	    	else return true;
+	    }
+	   
+        static void ShowInfo(ArrayList<PiligrimStation> station) {
+	        for (PiligrimStation st : station) {
+	            System.out.println("Station info: " + st.weight + st.race + st.ship_name);
+	        }
+	        }
+}
+
+
+
+Main.java
+
+
+
+package LABA_3_OOP;
+import java.util.ArrayList;
+
+public class Main {
+
+	    public static void main(String[] args) {
+	        
+	        ArrayList<PiligrimStation> station = new ArrayList<PiligrimStation>();
+	        PiligrimStation obj1 = new PiligrimStation("Ship #1", "Turyantsi", 15);
+	        PiligrimStation.addShipToStation(station, obj1);
+	        PiligrimStation obj2 = new PiligrimStation("Ship #2", "Hodakeytsi", 15);
+	        PiligrimStation.addShipToStation(station, obj2);
+	        PiligrimStation obj3 = new PiligrimStation("Ship #3", "Zemlyany", 54);
+	        PiligrimStation.addShipToStation(station, obj3);
+	        PiligrimStation.ShowInfo(station);
+	        PiligrimStation obj4 = new PiligrimStation("Ship #4", "Zemlyany", 2);
+	        PiligrimStation.addShipToStation(station, obj4);
+	        
+	    }
+
+}
