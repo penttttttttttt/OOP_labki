@@ -5,64 +5,77 @@ PiligrimStation.java
 package LABA_3_OOP;
 import java.util.ArrayList;
 
-	class PiligrimStation {
-	    String ship_name;
-	    String race;
-	    int weight;
+	class PiligrimStation extends ShipsDescription{
+		
+        PiligrimStation(String ship_name, String race, int weight){
+        	super(ship_name, race, weight);
+        }
+		
+	    static ArrayList<PiligrimStation> ships = new ArrayList<>();
 
-	    PiligrimStation(String ship_name, String race, int weight) {
-	        this.ship_name = ship_name;
-	        this.race = race;
-	        this.weight = weight;
-	    }
-
-	    PiligrimStation() {
-	        this.ship_name = "";
-	        this.race = "";
-	        this.weight = 0;
-	    }
-
-	    static boolean isShipsMoreThan10(ArrayList<PiligrimStation> station) {
+		boolean isShipsMoreThan10() {
 	        boolean flag = false;
-	        if (station.size() < 10) {
+	        if (ships.size() < 10) {
 	            flag = true;
 	        }
 	        return flag;
 	    }
-
-	    static void addShipToStation(ArrayList<PiligrimStation> station, PiligrimStation ship) {
-	        if (isShipsMoreThan10(station) && checkWeight(station, ship, 100) && checkRace(station, ship)) {
-	        	station.add(ship);
-	        } else System.out.println("Error. There are more than 10 ships already.");
+	    
+	    boolean checkWeight(final int limitWeight) {
+	    	int sumWeight = 0;
+	    	for(PiligrimStation st : ships) {
+	    		sumWeight += st.weight;   
+	    	}
+	    	sumWeight += weight;
+	    	if(sumWeight > limitWeight)
+	    		return false;
+	    	else return true;
 	    }
-
-	    static boolean checkRace(ArrayList<PiligrimStation> station, PiligrimStation ship) {
+	    
+	    boolean checkRace() { 	
 	    	boolean flag = true;
-	    	for(PiligrimStation st : station) {
-	    		if((st.race == "Turyantsi" && ship.race == "Hodakeytsi")|| (st.race == "Zemlyany" && ship.race == "Turyantsi")) {
+	    	for(PiligrimStation st : ships) {
+	    		if((st.race == "Turyantsi" && race == "Hodakeytsi") || (st.race == "Zemlyany" && race == "Turyantsi")) {
 	    			flag = false;
 	    	    } else flag = true;
 	    	}
 			return flag;
 	    }
-	     
-	    static boolean checkWeight(ArrayList<PiligrimStation> station, PiligrimStation ship, int limitWeight) {
-	    	int sumWeight = 0;
-	    	for(PiligrimStation st : station) {
-	    		sumWeight += st.weight;   
-	    	}
-	    	sumWeight += ship.weight;
-	    	if(sumWeight > limitWeight)
-	    		return false;
-	    	else return true;
+	    
+	    void addShipToStation() {
+	        if (isShipsMoreThan10() & checkWeight(100) & checkRace()) {
+	        	ships.add(this);
+	        } else System.out.println("There are more than 10 ships already or there is error with race compatibility.");
 	    }
 	   
-        static void ShowInfo(ArrayList<PiligrimStation> station) {
-	        for (PiligrimStation st : station) {
-	            System.out.println("Station info: " + st.weight + st.race + st.ship_name);
+        static void ShowInfo() {
+	        for (PiligrimStation st : ships) {
+	            System.out.println("Station info: " + "weight:" + st.weight + "  " + "race:" + st.race + "  " + "ship name:" + "  " + st.ship_name);
 	        }
-	        }
-}
+	        }}
+		
+
+
+		
+ShipsDescription.java
+
+
+package LABA_3_OOP;
+
+public class ShipsDescription {
+	
+	    String ship_name;
+	    String race;
+	    int weight;
+	    
+	    ShipsDescription(String ship_name, String race, int weight) {
+	        this.ship_name = ship_name;
+	        this.race = race;
+	        this.weight = weight;
+	    }
+	    }
+
+
 
 
 
@@ -71,23 +84,19 @@ Main.java
 
 
 package LABA_3_OOP;
-import java.util.ArrayList;
 
 public class Main {
 
-	    public static void main(String[] args) {
-	        
-	        ArrayList<PiligrimStation> station = new ArrayList<PiligrimStation>();
-	        PiligrimStation obj1 = new PiligrimStation("Ship #1", "Turyantsi", 15);
-	        PiligrimStation.addShipToStation(station, obj1);
-	        PiligrimStation obj2 = new PiligrimStation("Ship #2", "Hodakeytsi", 15);
-	        PiligrimStation.addShipToStation(station, obj2);
-	        PiligrimStation obj3 = new PiligrimStation("Ship #3", "Zemlyany", 54);
-	        PiligrimStation.addShipToStation(station, obj3);
-	        PiligrimStation.ShowInfo(station);
-	        PiligrimStation obj4 = new PiligrimStation("Ship #4", "Zemlyany", 2);
-	        PiligrimStation.addShipToStation(station, obj4);
-	        
+	   public static void main(String[] args) {
+		   
+	        PiligrimStation piligrim1 = new PiligrimStation("Ship #1", "Turyantsi", 15); 
+	        PiligrimStation piligrim2 = new PiligrimStation("Ship #2", "Hodakeytsi", 15);
+	        piligrim1.addShipToStation();
+	        piligrim2.addShipToStation();
+	        PiligrimStation piligrim3 = new PiligrimStation("Ship #3", "Zemlyany", 54);
+	        piligrim3.addShipToStation();
+	        PiligrimStation piligrim4 = new PiligrimStation("Ship #4", "Zemlyany", 2);
+	        piligrim4.addShipToStation();
+	        PiligrimStation.ShowInfo();
 	    }
-
 }
