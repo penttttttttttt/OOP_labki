@@ -1,0 +1,216 @@
+PiligrimStation.java
+
+
+
+
+package oop_4_laba;
+import java.util.ArrayList;
+
+class PiligrimStation extends ShipsDescription {
+	PiligrimStation(String ship_name, String race, int weight){
+    	super(ship_name, race, weight);
+    }
+	
+    static ArrayList<PiligrimStation> ships = new ArrayList<>();
+
+	boolean isShipsMoreThan10() {
+        boolean flag = false;
+        if (ships.size() < 10) {
+            flag = true;
+        }
+        return flag;
+    }
+    
+    boolean checkWeight(final int limitWeight) {
+    	int sumWeight = 0;
+    	for(PiligrimStation st : ships) {
+    		sumWeight += st.weight;   
+    	}
+    	if(sumWeight > limitWeight)
+    		return false;
+    	else return true;
+    }
+    
+    boolean checkRace() { 	
+    	boolean flag = true;
+    	for(PiligrimStation st : ships) {
+    		if((st.race == "Turyantsi" && race == "Hodakeytsi") || (st.race == "Zemlyany" && race == "Turyantsi")) {
+    			flag = false;
+    	    } else flag = true;
+    	}
+		return flag;
+    }
+    
+    boolean addShipToStation() {
+    	boolean flag = false;
+        if (isShipsMoreThan10() & checkWeight(100) & checkRace()) {
+        	ships.add(this);
+        	flag = true;
+        } else System.out.println("There are more than 10 ships already or there is error with race compatibility.");
+		return flag;
+    }
+   
+    static void ShowInfo() {
+        for (PiligrimStation st : ships) {
+            System.out.println("Station info: " + "weight:" + st.weight + "  " + "race:" + st.race + "  " + "ship name:" + "  " + st.ship_name);
+        }
+        }}
+
+
+
+
+PiligrimStationTest.java
+
+
+
+
+package oop_4_laba;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+class PiligrimStationTest {
+
+	@BeforeEach
+	void setUp() throws Exception {
+	}
+
+	@AfterEach
+	void tearDown() throws Exception {
+	}
+
+	@Test
+	void testIsShipsMoreThan10() {
+		
+		ArrayList<PiligrimStation> ships = new ArrayList<>();
+		boolean actual = false;
+		boolean expected;
+		
+		PiligrimStation piligrim1 = new PiligrimStation("Ship #1", "Turyantsi", 1);
+		PiligrimStation piligrim2 = new PiligrimStation("Ship #2", "Hodakeytsi", 1);
+
+		piligrim1.addShipToStation();
+		piligrim2.addShipToStation();
+        
+		expected = piligrim1.isShipsMoreThan10();
+		
+		ships.add(piligrim1);
+		ships.add(piligrim2);
+		if (ships.size() < 10) {
+			actual = true;
+		}
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	void testCheckWeight() {
+		boolean expected;
+		boolean actual = true;
+		int testLimitWeight = 100;
+		int testSumWeight = 0;
+		ArrayList<PiligrimStation> ships = new ArrayList<>();
+		
+		PiligrimStation piligrim1 = new PiligrimStation("Ship #1", "Turyantsi", 1);
+		PiligrimStation piligrim2 = new PiligrimStation("Ship #2", "Hodakeytsi", 1);
+		piligrim1.addShipToStation();
+		piligrim2.addShipToStation();
+		expected = piligrim1.checkWeight(testLimitWeight);
+		
+		ships.add(piligrim1);
+		ships.add(piligrim2);
+		
+		for(PiligrimStation st : ships) {
+			testSumWeight += st.weight;   
+		}
+    	if(testSumWeight > testLimitWeight) {
+    		actual = false;
+    	}
+    	assertEquals(expected, actual);
+	}
+
+	@Test
+	void testCheckRace() {
+		boolean expected;
+		boolean actual = true;
+
+		ArrayList<PiligrimStation> ships = new ArrayList<>();
+		
+		PiligrimStation piligrim1 = new PiligrimStation("Ship #1", "Turyantsi", 1);
+		PiligrimStation piligrim2 = new PiligrimStation("Ship #2", "Hodakeytsi", 1);
+		piligrim1.addShipToStation();
+		piligrim2.addShipToStation();
+		expected = piligrim1.checkRace();
+		
+		ships.add(piligrim1);
+		ships.add(piligrim2);
+		
+		for(PiligrimStation st : ships) {
+			if((st.race == "Turyantsi" && st.race == "Hodakeytsi") || (st.race == "Zemlyany" && st.race == "Turyantsi")) {
+				actual = false;
+			}
+		}
+    	assertEquals(expected, actual);
+	}
+
+	@Test
+	void testAddShipToStation() {
+		boolean expected;
+		boolean actual;
+
+		ArrayList<PiligrimStation> ships = new ArrayList<>();
+		
+		PiligrimStation piligrim1 = new PiligrimStation("Ship #1", "Turyantsi", 1);
+		
+		expected = piligrim1.addShipToStation();
+
+		ships.add(piligrim1);
+		actual = ships.contains(piligrim1);
+		assertEquals(expected, actual);		
+	}
+}
+
+
+
+
+ShipsDescription.java
+
+
+
+
+package oop_4_laba;
+
+public class ShipsDescription {
+	
+    String ship_name;
+    String race;
+    int weight;
+    
+    ShipsDescription(String ship_name, String race, int weight) {
+        this.ship_name = ship_name;
+        this.race = race;
+        this.weight = weight;
+    }
+    }
+    
+    
+    
+    
+    Main.java
+    
+    
+    
+    
+    package oop_4_laba;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+	}
+
+}
